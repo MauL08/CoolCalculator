@@ -1,5 +1,6 @@
 import 'package:calculator_app/drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:math_expressions/math_expressions.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -7,9 +8,38 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int equation = 0;
-  int num1 = 0;
-  int history = 0;
+  String req = '0';
+  String res = '0';
+
+  buttonControl(String value) {
+    setState(() {
+      if (value == 'C') {
+        req = '0';
+        res = '0';
+      } else if (value == '<') {
+        req = req.substring(0, req.length - 1);
+        if (req == "") {
+          req = "0";
+        }
+      } else if (value == '=') {
+        try {
+          Parser p = Parser();
+          Expression exp = p.parse(req);
+
+          ContextModel cm = ContextModel();
+          res = '${exp.evaluate(EvaluationType.REAL, cm)}';
+        } catch (e) {
+          res = "Error";
+        }
+      } else {
+        if (req == '0') {
+          req = value;
+        } else {
+          req = req + value;
+        }
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,22 +91,27 @@ class _HomeState extends State<Home> {
                       borderRadius: BorderRadius.circular(20.0),
                     ),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
-                          history.toString(),
+                          req,
                           style: TextStyle(
                             color: Colors.white,
+                            fontSize: 18,
                           ),
+                          maxLines: 1,
                         ),
                         SizedBox(
                           height: 20.0,
                         ),
                         Text(
-                          equation.toString(),
+                          res,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 24,
                           ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ],
                     ),
@@ -93,7 +128,9 @@ class _HomeState extends State<Home> {
                                 primary: Colors.deepPurple.shade600,
                                 padding: EdgeInsets.all(25),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                buttonControl('C');
+                              },
                               child: Text(
                                 'C',
                                 style: TextStyle(
@@ -107,7 +144,9 @@ class _HomeState extends State<Home> {
                                 primary: Colors.deepPurple.shade600,
                                 padding: EdgeInsets.all(25),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                buttonControl('%');
+                              },
                               child: Text(
                                 '%',
                                 style: TextStyle(
@@ -121,7 +160,9 @@ class _HomeState extends State<Home> {
                                 primary: Colors.pink.shade700,
                                 padding: EdgeInsets.all(25),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                buttonControl('<');
+                              },
                               child: Text(
                                 '<',
                                 style: TextStyle(
@@ -135,7 +176,9 @@ class _HomeState extends State<Home> {
                                 primary: Colors.pink.shade700,
                                 padding: EdgeInsets.all(25),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                buttonControl('/');
+                              },
                               child: Text(
                                 '/',
                                 style: TextStyle(
@@ -157,7 +200,9 @@ class _HomeState extends State<Home> {
                                 primary: Colors.deepPurple.shade600,
                                 padding: EdgeInsets.all(25),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                buttonControl("7");
+                              },
                               child: Text(
                                 '7',
                                 style: TextStyle(
@@ -171,7 +216,9 @@ class _HomeState extends State<Home> {
                                 primary: Colors.deepPurple.shade600,
                                 padding: EdgeInsets.all(25),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                buttonControl("8");
+                              },
                               child: Text(
                                 '8',
                                 style: TextStyle(
@@ -185,7 +232,9 @@ class _HomeState extends State<Home> {
                                 primary: Colors.deepPurple.shade600,
                                 padding: EdgeInsets.all(25),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                buttonControl("9");
+                              },
                               child: Text(
                                 '9',
                                 style: TextStyle(
@@ -199,7 +248,9 @@ class _HomeState extends State<Home> {
                                 primary: Colors.pink.shade700,
                                 padding: EdgeInsets.all(25),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                buttonControl('*');
+                              },
                               child: Text(
                                 '*',
                                 style: TextStyle(
@@ -221,7 +272,9 @@ class _HomeState extends State<Home> {
                                 primary: Colors.deepPurple.shade600,
                                 padding: EdgeInsets.all(25),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                buttonControl('4');
+                              },
                               child: Text(
                                 '4',
                                 style: TextStyle(
@@ -235,7 +288,9 @@ class _HomeState extends State<Home> {
                                 primary: Colors.deepPurple.shade600,
                                 padding: EdgeInsets.all(25),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                buttonControl('5');
+                              },
                               child: Text(
                                 '5',
                                 style: TextStyle(
@@ -249,7 +304,9 @@ class _HomeState extends State<Home> {
                                 primary: Colors.deepPurple.shade600,
                                 padding: EdgeInsets.all(25),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                buttonControl('6');
+                              },
                               child: Text(
                                 '6',
                                 style: TextStyle(
@@ -263,7 +320,9 @@ class _HomeState extends State<Home> {
                                 primary: Colors.pink.shade700,
                                 padding: EdgeInsets.all(25),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                buttonControl('-');
+                              },
                               child: Text(
                                 '-',
                                 style: TextStyle(
@@ -285,7 +344,9 @@ class _HomeState extends State<Home> {
                                 primary: Colors.deepPurple.shade600,
                                 padding: EdgeInsets.all(25),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                buttonControl('1');
+                              },
                               child: Text(
                                 '1',
                                 style: TextStyle(
@@ -299,7 +360,9 @@ class _HomeState extends State<Home> {
                                 primary: Colors.deepPurple.shade600,
                                 padding: EdgeInsets.all(25),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                buttonControl('2');
+                              },
                               child: Text(
                                 '2',
                                 style: TextStyle(
@@ -313,7 +376,9 @@ class _HomeState extends State<Home> {
                                 primary: Colors.deepPurple.shade600,
                                 padding: EdgeInsets.all(25),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                buttonControl('3');
+                              },
                               child: Text(
                                 '3',
                                 style: TextStyle(
@@ -327,7 +392,9 @@ class _HomeState extends State<Home> {
                                 primary: Colors.pink.shade700,
                                 padding: EdgeInsets.all(25),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                buttonControl('+');
+                              },
                               child: Text(
                                 '+',
                                 style: TextStyle(
@@ -358,7 +425,9 @@ class _HomeState extends State<Home> {
                                 primary: Colors.deepPurple.shade600,
                                 padding: EdgeInsets.all(25),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                buttonControl('0');
+                              },
                               child: Text(
                                 '0',
                                 style: TextStyle(
@@ -381,7 +450,9 @@ class _HomeState extends State<Home> {
                                 primary: Colors.pink.shade700,
                                 padding: EdgeInsets.all(25),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                buttonControl('=');
+                              },
                               child: Text(
                                 '=',
                                 style: TextStyle(

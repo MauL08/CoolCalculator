@@ -43,7 +43,7 @@ class DrawerPage extends StatelessWidget {
                   separatorBuilder: (context, index) {
                     return VerticalDivider();
                   },
-                  itemCount: 10,
+                  itemCount: 1,
                 ),
               ],
             ),
