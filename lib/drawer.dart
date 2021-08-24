@@ -1,6 +1,10 @@
+import 'package:calculator_app/data.dart';
 import 'package:flutter/material.dart';
 
 class DrawerPage extends StatelessWidget {
+  List req = historyReq;
+  List res = historyRes;
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -32,19 +36,46 @@ class DrawerPage extends StatelessWidget {
                       ),
                       margin: EdgeInsets.only(bottom: 15.0),
                       padding: EdgeInsets.all(15.0),
-                      child: Text(
-                        'Coming Soon',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            req[index],
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10.0,
+                          ),
+                          Text(
+                            '-> ${res[index]}',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ],
                       ),
                     );
                   },
                   separatorBuilder: (context, index) {
                     return VerticalDivider();
                   },
-                  itemCount: 1,
+                  itemCount: req.length,
                 ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.pink.shade900,
+                    padding: EdgeInsets.all(15),
+                  ),
+                  onPressed: () async {
+                    req.clear();
+                    res.clear();
+                  },
+                  child: Text('Reset'),
+                )
               ],
             ),
           ),

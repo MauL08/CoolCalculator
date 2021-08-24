@@ -1,3 +1,4 @@
+import 'package:calculator_app/data.dart';
 import 'package:calculator_app/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:math_expressions/math_expressions.dart';
@@ -8,6 +9,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  List data1 = historyReq;
+  List data2 = historyRes;
+
   String req = '0';
   String res = '0';
 
@@ -31,6 +35,8 @@ class _HomeState extends State<Home> {
         } catch (e) {
           res = "Error";
         }
+        data1.add(req);
+        data2.add(res);
       } else {
         if (req == '0') {
           req = value;
@@ -125,7 +131,7 @@ class _HomeState extends State<Home> {
                           children: [
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                primary: Colors.deepPurple.shade600,
+                                primary: Colors.pink.shade900,
                                 padding: EdgeInsets.all(25),
                               ),
                               onPressed: () {
@@ -141,11 +147,11 @@ class _HomeState extends State<Home> {
                             ),
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                primary: Colors.deepPurple.shade600,
+                                primary: Colors.pink.shade700,
                                 padding: EdgeInsets.all(25),
                               ),
                               onPressed: () {
-                                buttonControl('%');
+                                buttonControl(' % ');
                               },
                               child: Text(
                                 '%',
@@ -177,7 +183,7 @@ class _HomeState extends State<Home> {
                                 padding: EdgeInsets.all(25),
                               ),
                               onPressed: () {
-                                buttonControl('/');
+                                buttonControl(' / ');
                               },
                               child: Text(
                                 '/',
@@ -249,7 +255,7 @@ class _HomeState extends State<Home> {
                                 padding: EdgeInsets.all(25),
                               ),
                               onPressed: () {
-                                buttonControl('*');
+                                buttonControl(' * ');
                               },
                               child: Text(
                                 '*',
@@ -321,7 +327,7 @@ class _HomeState extends State<Home> {
                                 padding: EdgeInsets.all(25),
                               ),
                               onPressed: () {
-                                buttonControl('-');
+                                buttonControl(' - ');
                               },
                               child: Text(
                                 '-',
@@ -393,7 +399,7 @@ class _HomeState extends State<Home> {
                                 padding: EdgeInsets.all(25),
                               ),
                               onPressed: () {
-                                buttonControl('+');
+                                buttonControl(' + ');
                               },
                               child: Text(
                                 '+',
@@ -413,17 +419,8 @@ class _HomeState extends State<Home> {
                           children: [
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                primary: Colors.transparent,
-                                elevation: 0.0,
-                                padding: EdgeInsets.all(25),
-                              ),
-                              onPressed: () {},
-                              child: Text(''),
-                            ),
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
                                 primary: Colors.deepPurple.shade600,
-                                padding: EdgeInsets.all(25),
+                                padding: EdgeInsets.fromLTRB(113, 25, 113, 25),
                               ),
                               onPressed: () {
                                 buttonControl('0');
@@ -438,16 +435,7 @@ class _HomeState extends State<Home> {
                             ),
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                primary: Colors.transparent,
-                                elevation: 0.0,
-                                padding: EdgeInsets.all(25),
-                              ),
-                              onPressed: () {},
-                              child: Text(''),
-                            ),
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                primary: Colors.pink.shade700,
+                                primary: Colors.pink.shade900,
                                 padding: EdgeInsets.all(25),
                               ),
                               onPressed: () {
