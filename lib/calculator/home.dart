@@ -1,5 +1,5 @@
-import 'package:calculator_app/data.dart';
-import 'package:calculator_app/drawer.dart';
+import 'data.dart';
+import 'drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:math_expressions/math_expressions.dart';
 
